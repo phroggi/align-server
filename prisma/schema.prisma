@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// generator typegraphql {
+//   provider                 = "typegraphql-prisma"
+//   output                   = "../prisma/generated/type-graphql"
+//   emitDMMF                 = true
+//   simpleResolvers          = false
+//   useUncheckedScalarInputs = false
+//   emitIdAsIDType           = true
+// }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map(name: "users")
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  title       String
+  image       String?  @default("")
+  description String
+  price       Decimal
+  features    String[]
+  category    String
+  slug        String   @unique
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map(name: "products")
+}
