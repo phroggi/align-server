@@ -1,56 +1,56 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as TypeGraphQL from "type-graphql";
-
-@TypeGraphQL.ObjectType({
+import "reflect-metadata";
+import { ObjectType, Field, ID } from "type-graphql";
+@ObjectType({
   isAbstract: true,
 })
-export class Product {
-  @TypeGraphQL.Field((_type) => TypeGraphQL.ID, {
+export default class Product {
+  @Field((_type) => ID, {
     nullable: false,
   })
   id!: number;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   image?: string;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   title!: string;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   description!: string;
 
-  @TypeGraphQL.Field({
+  @Field({
     nullable: false,
   })
   price!: number;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   slug!: string;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
-  category!: string;
+  features!: string;
 
-  @TypeGraphQL.Field(() => [], {
-    nullable: false,
-  })
-  features!: string[];
+  // @Field((_type) => [Collection], {
+  //   nullable: "itemsAndList",
+  // })
+  // collections!: string;
 
-  @TypeGraphQL.Field((_type) => Date, {
+  @Field((_type) => Date, {
     nullable: false,
   })
   createdAt!: Date;
 
-  @TypeGraphQL.Field((_type) => Date, {
+  @Field((_type) => Date, {
     nullable: false,
   })
   updatedAt!: Date;

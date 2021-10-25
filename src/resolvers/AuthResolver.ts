@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { PrismaClient } from "@prisma/client";
 import argon2 from "argon2";
-import { Resolver, Mutation, Arg, Field, Ctx, ObjectType } from "type-graphql";
+import { Resolver, Mutation, Arg, Field, Ctx, ObjectType, Query } from "type-graphql";
 
 import { User } from "../models/User";
 import { MyContext } from "../types";
@@ -30,6 +30,17 @@ class UserResponse {
 
 @Resolver(User)
 export class AuthResolver {
+  @Query(() => User)
+  async userById(@Arg("id") id: number) {
+    const user = prisma.user.findUnique({
+      where: { id },
+    });
+
+    return {
+      user,
+    };
+  }
+
   // @FieldResolver(() => String)
   // email(@Root() user: User, @Ctx() { req }: MyContext) {
   //   // this is the current user and its ok to show them their own email
@@ -40,7 +51,7 @@ export class AuthResolver {
   //   return "";
   // }
 
-  @Mutation(() => UserResponse)
+  // @Mutation(() => UserResponse)
   // async changePassword(
   //   @Arg("token") token: string,
   //   @Arg("newPassword") newPassword: string,

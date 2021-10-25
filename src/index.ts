@@ -8,9 +8,10 @@ import Redis from "ioredis";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 
-import { AuthResolver } from "./resolvers/AuthResolver";
 import "dotenv/config";
 import { __prod__, COOKIE_NAME } from "./utils/constants";
+import { AuthResolver } from "./resolvers/AuthResolver";
+import ProductResolver from "./resolvers/ProductResolver";
 
 (async () => {
   const app = express();
@@ -46,7 +47,7 @@ import { __prod__, COOKIE_NAME } from "./utils/constants";
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [AuthResolver],
+      resolvers: [AuthResolver, ProductResolver],
       validate: false,
     }),
     context: ({ req, res }) => ({

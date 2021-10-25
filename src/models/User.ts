@@ -1,36 +1,37 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import * as TypeGraphQL from "type-graphql";
+import "reflect-metadata";
+import { ObjectType, Field, ID } from "type-graphql";
 
-@TypeGraphQL.ObjectType({
+@ObjectType({
   isAbstract: true,
 })
 export class User {
-  @TypeGraphQL.Field((_type) => TypeGraphQL.ID, {
+  @Field((_type) => ID, {
     nullable: false,
   })
   id!: number;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   uuid!: string;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   email!: string;
 
-  @TypeGraphQL.Field((_type) => String, {
+  @Field((_type) => String, {
     nullable: false,
   })
   password!: string;
 
-  @TypeGraphQL.Field((_type) => Date, {
+  @Field((_type) => Date, {
     nullable: false,
   })
   createdAt!: Date;
 
-  @TypeGraphQL.Field((_type) => Date, {
+  @Field((_type) => Date, {
     nullable: false,
   })
   updatedAt!: Date;

@@ -19,6 +19,17 @@ generator client {
 //   emitIdAsIDType           = true
 // }
 
+// model Collection {
+//   id        Int      @id @default(autoincrement())
+//   title     String
+//   slug      String
+//   products Product[]
+//   createdAt DateTime @default(now()) @map("created_at")
+//   updatedAt DateTime @updatedAt @map("updated_at")
+  
+//   @@map(name: "collection")
+// }
+
 model User {
   id        Int      @id @default(autoincrement())
   uuid      String   @unique @default(uuid())
@@ -36,8 +47,8 @@ model Product {
   image       String?  @default("")
   description String
   price       Decimal
-  features    String[]
-  category    String
+  features    String
+  // collections Collection[]
   slug        String   @unique
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
